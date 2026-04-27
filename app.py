@@ -61,12 +61,13 @@ def render_sidebar():
         st.markdown("---")
         st.subheader("Settings")
 
-        # Model selection
+        # Model selection — defaulting to gpt-4o-mini since it's faster and cheaper
+        # for my personal use; switch to gpt-4o for more complex documents
         model_options = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-3.5-turbo"]
         selected_model = st.selectbox(
             "Select Model",
             options=model_options,
-            index=0,
+            index=1,
             help="Choose the language model for tutoring.",
         )
         st.session_state.selected_model = selected_model
@@ -95,42 +96,4 @@ def render_main_content():
             st.markdown("""
             1. **Upload a PDF** using the sidebar uploader
             2. **Ask questions** about the document content
-            3. **Learn interactively** with AI-powered explanations
-            4. **Explore concepts** through guided tutoring sessions
-            """)
-        return
-
-    # Display chat messages
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    # Chat input
-    if prompt := st.chat_input("Ask a question about your document..."):
-        # Add user message
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-
-        # Placeholder for AI response (pipeline integration pending)
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking..."):
-                response = (
-                    "Document processing pipeline is being initialized. "
-                    "Please check back shortly."
-                )
-                st.markdown(response)
-
-        st.session_state.messages.append({"role": "assistant", "content": response})
-
-
-def main():
-    """Main application entry point."""
-    logger.info("Starting DeepTutor application")
-    initialize_session_state()
-    render_sidebar()
-    render_main_content()
-
-
-if __name__ == "__main__":
-    main()
+         
