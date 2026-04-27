@@ -62,8 +62,9 @@ def render_sidebar():
         st.subheader("Settings")
 
         # Model selection — defaulting to gpt-4o-mini since it's faster and cheaper
-        # for my personal use; switch to gpt-4o for more complex documents
-        model_options = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-3.5-turbo"]
+        # for my personal use; switch to gpt-4o for more complex documents.
+        # Removed gpt-3.5-turbo from the list — it struggles with technical PDFs.
+        model_options = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo"]
         selected_model = st.selectbox(
             "Select Model",
             options=model_options,
@@ -93,7 +94,4 @@ def render_main_content():
             "DeepTutor will help you understand and learn from your documents."
         )
         with st.expander("How to use DeepTutor"):
-            st.markdown("""
-            1. **Upload a PDF** using the sidebar uploader
-            2. **Ask questions** about the document content
-         
+            st.markdown
